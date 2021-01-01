@@ -1,4 +1,6 @@
 import './App.css';
+import styled from "styled-components";
+import { css } from '@emotion/css'
 
 function App() {
   return (
@@ -7,12 +9,49 @@ function App() {
         <Button type="danger">Click Me!</Button>
         <Button type="primary">Click Me!</Button>
         <Button>Click Me!</Button>
+        <StyledButton>Click me too!</StyledButton>
+        <DangerButton>Warning!</DangerButton>
+        <EmotionButton />
       </header>
     </div>
   );
 }
 
+const StyledButton = styled.button`
+  --normal-background: green;
+  --active-background: lightgreen;
+  --hover-background: darkgreen;
+  font-size: 20px;
+  color: white;
+  background-color:var(--normal-background);
+  border: none;
+  border-radius: ${props => props.borderRadius || 5}px;
+  padding: 10px;
+  outline: none;
+  margin: 5px;
+    &:hover {
+    background-color: var(--hover-background);
+  }
+  &:active {
+    background-color: var(--active-background);
+  }
+`;
 
+const DangerButton = styled(StyledButton)`
+  --normal-background: red;
+  --active-background: pink;
+  --hover-background: darkred;
+`;
+
+
+function EmotionButton() {
+  const emotionButtonStyle = css`
+    background-color: violet;
+    margin: 20px;
+    color: orange;
+  `;
+  return <button className={emotionButtonStyle}>Emotion</button>
+}
 function Button(props) {
   const buttonStyle = {};
   if (props.type === "primary") {
@@ -25,7 +64,7 @@ function Button(props) {
     buttonStyle["--hover-background"] = "darkred";
   }
   return(
-    <button className="Button" style={buttonStyle}>{props.children}</button>
+    <StyledButton borderRadius={20} className="Button" style={buttonStyle}>{props.children}</StyledButton>
   )
 }
 
