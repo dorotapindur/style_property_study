@@ -11,7 +11,7 @@ function App() {
         <Button>Click Me!</Button>
         <StyledButton>Click me too!</StyledButton>
         <DangerButton>Warning!</DangerButton>
-        <EmotionButton />
+        <EmotionButton color="pink"/>
       </header>
     </div>
   );
@@ -44,11 +44,18 @@ const DangerButton = styled(StyledButton)`
 `;
 
 
-function EmotionButton() {
+function EmotionButton(props) {
+  const {color} = props;
+  let background = "violet";
+  if (color === "pink") {
+    background = "black";
+  }
   const emotionButtonStyle = css`
-    background-color: violet;
+    background-color: ${background};
     margin: 20px;
-    color: orange;
+    color: ${color};
+    font-size: 16px;
+    padding: 10px;
   `;
   return <button className={emotionButtonStyle}>Emotion</button>
 }
